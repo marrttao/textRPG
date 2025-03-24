@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\core\logger\logger.cpp" />
+    <ClCompile Include="src\core\logger\LoggerMacro.h" />
+    <ClCompile Include="src\domain\services\json\models\itemm\sword\sword.cpp" />
+    <ClCompile Include="src\domain\services\json\services\json_mapper\json_mapper.cpp" />
+    <ClCompile Include="src\domain\services\json\services\json_reader\json_reader.cpp" />
+    <ClCompile Include="src\domain\repositories\item_repository\item_repository.cpp" />
+    <ClCompile Include="src\domain\repositories\inventory_repository\inventory_repository.cpp" />
+    <ClCompile Include="src\domain\services\json\models\itemm\potion\potion.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\core\logger\logger.h" />
+    <ClInclude Include="src\domain\services\json\core\json_object.h" />
+    <ClInclude Include="src\domain\services\json\core\json_parser.h" />
+    <ClInclude Include="src\domain\services\json\models\itemm\sword\sword.h" />
+    <ClInclude Include="src\domain\services\json\models\items\swords.h" />
+    <ClInclude Include="src\domain\services\json\repositories\sword_repository\sword_repository.h" />
+    <ClInclude Include="src\domain\services\json\services\json_mapper\json_mapper.h" />
+    <ClInclude Include="src\domain\services\json\services\json_reader\json_reader.h" />
+    <ClInclude Include="src\domain\repositories\item_repository\item_repository.h" />
+    <ClInclude Include="src\domain\entities\character\character.h" />
+    <ClInclude Include="src\domain\entities\inventory\inventory.h" />
+    <ClInclude Include="src\domain\repositories\inventory_repository\inventory_repository.h" />
+    <ClInclude Include="src\domain\services\inventory_service\IInventory_service.h" />
+    <ClInclude Include="src\domain\services\inventory_service\inventory_service.h" />
+    <ClInclude Include="src\domain\services\json\repositories\potion_repository\potion_repository.h" />
+    <ClInclude Include="src\domain\services\json\models\items\potions.h" />
+    <ClInclude Include="src\domain\services\json\models\itemm\potion\potion.h" />
+    <ClInclude Include="src\domain\services\json\models\item\item.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="src\domain\services\json\assets\json\example.json" />
+    <None Include="src\data\local\inventory\inventory.json" />
+  </ItemGroup>
+</Project>
