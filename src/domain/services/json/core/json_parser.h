@@ -3,52 +3,34 @@
 
 #include "../services/json_reader/json_reader.h"
 #include "../services/json_mapper/json_mapper.h"
+#include <string>
+
+using namespace std;
 
 enum ParsingPath {
     STRING_FORMAT,
     FILE_FORMAT
 };
 
-class IJsonParser
-{
+class IJsonParser {
 public:
+    virtual ~IJsonParser() = default;
     virtual void parse(JsonObject& object, const string& path, ParsingPath type_of_path) = 0;
-    virtual std::string serialize(const std::vector<std::map<std::string, std::string>>& jsonItems) = 0;
 };
 
-class JsonParser : public IJsonParser, public IJsonReader
-{
+class JsonParser : public IJsonParser, public IJsonReader {
 public:
-    string read(const string& filename) override
-    {
-        return (JsonReader::read(filename) == nullptr) ? "" : *JsonReader::read(filename);
+    string read(const string& filename) override {
+        string* result = JsonReader::read(filename);
+        return result ? *result : "";
     }
-    void parse(JsonObject& object, const string& path, ParsingPath type_of_path) override
-    {
-        string json;
-        (type_of_path == ParsingPath::FILE_FORMAT) ? json = read(path) : json = path;
-        JsonMapper mapper;
-        mapper.map_json(json, object);
-    }
-    std::string serialize(const std::vector<std::map<std::string, std::string>>& jsonItems) override
-    {
-        std::string jsonString = "[";
-        for (const auto& item : jsonItems) {
-            jsonString += "{";
-            for (const auto& field : item) {
-                jsonString += "\"" + field.first + "\":\"" + field.second + "\",";
-            }
-            if (!item.empty()) {
-                jsonString.pop_back(); // Remove the trailing comma
-            }
-            jsonString += "},";
+
+    void parse(JsonObject& object, const string& path, ParsingPath type_of_path) override {
+        string json = (type_of_path == FILE_FORMAT) ? read(path) : path;
+        if (!json.empty()) {
+            JsonMapper mapper;
+            mapper.map_json(json, object);
         }
-        if (!jsonItems.empty()) {
-            jsonString.pop_back(); // Remove the trailing comma
-        }
-        jsonString += "]";
-        return jsonString;
     }
 };
-
-#endif // !JSON_PARSER_H
+#endif // JSON_PARSER_H

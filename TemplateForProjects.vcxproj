@@ -131,26 +131,34 @@
     <ClCompile Include="src\core\logger\LoggerMacro.h" />
     <ClCompile Include="src\domain\repositories\inventory_repository\inventory_repository.cpp" />
     <ClCompile Include="src\domain\repositories\item_repository\item_repository.cpp" />
-    <ClCompile Include="src\domain\services\json\models\itemm\potion\potion.cpp" />
-    <ClCompile Include="src\domain\services\json\models\itemm\sword\sword.cpp" />
+    <ClCompile Include="src\domain\services\json\models\book\book.cpp" />
+    <ClCompile Include="src\domain\services\json\repositories\default_event_repository.h" />
     <ClCompile Include="src\domain\services\json\services\json_mapper\json_mapper.cpp" />
     <ClCompile Include="src\domain\services\json\services\json_reader\json_reader.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ui\providers\events_provider.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\core\logger\logger.h" />
+    <ClInclude Include="src\domain\combat_system\combat_system.h" />
     <ClInclude Include="src\domain\entities\character\character.h" />
     <ClInclude Include="src\domain\entities\inventory\inventory.h" />
+    <ClInclude Include="src\domain\events\events_system\events_system.h" />
     <ClInclude Include="src\domain\repositories\inventory_repository\inventory_repository.h" />
     <ClInclude Include="src\domain\repositories\item_repository\item_repository.h" />
     <ClInclude Include="src\domain\services\inventory_service\IInventory_service.h" />
     <ClInclude Include="src\domain\services\inventory_service\inventory_service.h" />
     <ClInclude Include="src\domain\services\json\core\json_object.h" />
     <ClInclude Include="src\domain\services\json\core\json_parser.h" />
-    <ClInclude Include="src\domain\services\json\models\itemm\potion\potion.h" />
-    <ClInclude Include="src\domain\services\json\models\itemm\sword\sword.h" />
-    <ClInclude Include="src\domain\services\json\models\items\potions.h" />
-    <ClInclude Include="src\domain\services\json\models\items\swords.h" />
+    <ClInclude Include="src\domain\services\json\models\book\book.h" />
+    <ClInclude Include="src\domain\services\json\models\events\boss_events\boss_events.h" />
+    <ClInclude Include="src\domain\services\json\models\events\default_events\default_events.h" />
+    <ClInclude Include="src\domain\services\json\models\potions\potions.h" />
+    <ClInclude Include="src\domain\services\json\models\swords\swords.h" />
+    <ClInclude Include="src\domain\services\json\models\item\item.h" />
+    <ClInclude Include="src\domain\services\json\repositories\boss_event_repository.h" />
+    <ClInclude Include="src\domain\services\json\repositories\potion_repository.h" />
+    <ClInclude Include="src\domain\services\json\repositories\sword_repository.h" />
     <ClInclude Include="src\domain\services\json\repositories\potion_repository\potion_repository.h" />
     <ClInclude Include="src\domain\services\json\repositories\sword_repository\sword_repository.h" />
     <ClInclude Include="src\domain\services\json\services\json_mapper\json_mapper.h" />
@@ -158,7 +166,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="src\data\local\inventory\inventory.json" />
-    <None Include="src\domain\services\json\assets\json\example.json" />
+    <None Include="src\domain\events\boss_events.json" />
+    <None Include="src\domain\events\default_events.json" />
+    <None Include="src\domain\services\json\assets\json\potions.json" />
+    <None Include="src\domain\services\json\assets\json\swords.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

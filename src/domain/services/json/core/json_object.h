@@ -7,22 +7,17 @@
 
 using namespace std;
 
-class IJsonObject
-{
+class IJsonObject {
 public:
     virtual ~IJsonObject() = default;
     virtual vector<string> toJsonFields() = 0;
     virtual void fromJson(map<string, string> jsonMap) = 0;
 };
 
-class JsonObject : public IJsonObject
-{
+class JsonObject : public IJsonObject {
 public:
-    virtual vector<string> toJsonFields() {
-        return {};
-    }
-    virtual void fromJson(map<string, string> jsonMap) {}
+    virtual vector<string> toJsonFields() override { return {}; }
+    virtual void fromJson(map<string, string>) override {}
     virtual ~JsonObject() = default;
 };
-
-#endif // !JSON_OBJECT_H
+#endif // JSON_OBJECT_H

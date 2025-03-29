@@ -1,0 +1,52 @@
+{
+  "bosses": [
+    {
+      "id": 1,
+      "name": "Alpha Werewolf",
+      "description": "The leader of the werewolf pack, stronger and more ferocious.",
+      "type": "combat",
+      "location": "dark forest",
+      "effects": {
+        "health": 200,
+        "damage": 100,
+        "fear": 70
+      }
+    },
+    {
+      "id": 2,
+      "name": "Goblin King",
+      "description": "The ruler of the goblins, cunning and ruthless.",
+      "type": "combat",
+      "location": "goblin cave",
+      "effects": {
+        "health": 200,
+        "damage": 80,
+        "fear": 50
+      }
+    },
+    {
+      "id": 3,
+      "name": "Ancient Dragon",
+      "description": "An ancient dragon with immense power and wisdom.",
+      "type": "combat",
+      "location": "volcanic lair",
+      "effects": {
+        "health": 200,
+        "damage": 150,
+        "fear": 100
+      }
+    },
+    {
+      "id": 4,
+      "name": "Bandit Lord",
+      "description": "The leader of the bandits, skilled in combat and strategy.",
+      "type": "combat",
+      "location": "bandit camp",
+      "effects": {
+        "health": 200,
+        "damage": 70,
+        "fear": 40
+      }
+    }
+  ]
+}

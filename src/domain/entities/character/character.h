@@ -1,10 +1,12 @@
 #ifndef CHARACTER_H
 #define CHARACTER_H
 #include <string>
-#include "../../services/json/models/item/item.h"
+#include <iostream>
+#include "../inventory/inventory.h"
 class MainCharacter {
 public:
 	std::string name;
+	Inventory inventory;
 	short level;
 	short health;
 	short mana;
@@ -16,8 +18,27 @@ public:
 	short gold;
 	short attack;
 	short defense;
-	Item armor;
-	Item weapon;
+	std::string armor;
+	std::string weapon;
+
+	MainCharacter() {
+		std::string _name;
+		cin >> _name;
+		name = _name;
+		level = 1;
+		health = 100;
+		mana = 100;
+		strength = 10;
+		dexterity = 10;
+		intelligence = 10;
+		luck = 10;
+		experience = 0;
+		gold = 0;
+		attack = 10;
+		defense = 10;
+		armor = "None";
+		weapon = "None";
+	}
 
 };
 

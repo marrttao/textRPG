@@ -4,9 +4,9 @@
 #include <string>
 using namespace std;
 
-
 class IJsonReader {
 public:
+    virtual ~IJsonReader() = default;
     virtual string read(const string& filename) = 0;
 };
 
@@ -15,5 +15,4 @@ class JsonReader
 public:
     static string* read(const string& filename);
 };
-
-#endif // !JSON_READER_H
+#endif // JSON_READER_H

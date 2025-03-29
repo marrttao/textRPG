@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Healing Elixir",
+    "effect": "restore_health",
+    "potency": 50,
+    "duration": 30,
+    "ingredients": [ "honey", "ginseng", "moonflower" ]
+  },
+  {
+    "name": "Mana Potion",
+    "effect": "restore_mana",
+    "potency": 75,
+    "duration": 45,
+    "ingredients": [ "blue_essence", "crystal_shard" ]
+  }
+]

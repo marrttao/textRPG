@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Dragon Slayer",
+    "damage": 45,
+    "durability": 200,
+    "type": "two-handed",
+    "attributes": [ "fire_damage", "undead_slayer", "legendary" ]
+  },
+  {
+    "name": "Rapier of Shadows",
+    "damage": 28,
+    "durability": 120,
+    "type": "one-handed",
+    "attributes": [ "poisoned", "stealth_boost", "quick_attack" ]
+  },
+  {
+    "name": "Stone Crusher",
+    "damage": 60,
+    "durability": 300,
+    "type": "two-handed",
+    "attributes": [ "armor_piercing", "stun_chance", "heavy" ]
+  }
+]

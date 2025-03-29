@@ -1,21 +1,45 @@
 #ifndef INVENTORY_H
 #define INVENTORY_H
-#include <vector>
-#include <fstream>
 
-#include "../../services/json/core/json_parser.h"
 #include "../../services/json/core/json_object.h"
-#include "../../services/json/models/items/potions.h"
-#include "../../services/json/models/items/swords.h"
-#include "../../repositories/item_repository/item_repository.h"
-#define FILE_PATH "src/domain/services/json/assets/json/example.json"
+#include <vector>
+#include <string>
+#include <map>
 
-class Inventory {
-protected:
-    // load inventory from json
-    std::vector<JsonObject> items;
+using namespace std;
+
+class Inventory : public JsonObject {
 public:
-    
+    vector<string> items;
+
+    vector<string> toJsonFields() override {
+        return { "items" };
+    }
+
+    void fromJson(map<string, string> jsonMap) override {
+        items.clear();
+        for (int i = 0; ; ++i) {
+            string key = "items[" + to_string(i) + "]";
+            if (jsonMap.count(key)) {
+                items.push_back(jsonMap[key]);
+            }
+            else {
+                break;
+            }
+        }
+    }
+
+    std::string to_json() const {
+        std::string json = "[";
+        for (size_t i = 0; i < items.size(); ++i) {
+            json += "\"" + items[i] + "\"";
+            if (i < items.size() - 1) {
+                json += ",";
+            }
+        }
+        json += "]";
+        return json;
+    }
 };
 
 #endif // INVENTORY_H

@@ -1,30 +1,23 @@
 ﻿#include "json_mapper.h"
-
 #include <stack>
 
-bool JsonMapper::isWhitespace(char c)
-{
+bool JsonMapper::isWhitespace(char c) {
     return c == ' ' || c == '\t' || c == '\n' || c == '\r';
 }
 
-bool JsonMapper::isDigit(char c)
-{
+bool JsonMapper::isDigit(char c) {
     return c >= '0' && c <= '9';
 }
 
-string JsonMapper::parseStringValue(const string& json, size_t& i)
-{
+string JsonMapper::parseStringValue(const string& json, size_t& i) {
     string value;
     ++i; // Skip opening quote
-    while (i < json.size() && json[i] != '\"')
-    {
-        if (json[i] == '\\' && i + 1 < json.size())
-        {
+    while (i < json.size() && json[i] != '\"') {
+        if (json[i] == '\\' && i + 1 < json.size()) {
             value += json[i + 1];
             i += 2;
         }
-        else
-        {
+        else {
             value += json[i];
             ++i;
         }
@@ -32,11 +25,10 @@ string JsonMapper::parseStringValue(const string& json, size_t& i)
     return value;
 }
 
-string JsonMapper::parseNumberValue(const string& json, size_t& i)
-{
+string JsonMapper::parseNumberValue(const string& json, size_t& i) {
     string value;
-    while (i < json.size() && (isDigit(json[i]) || json[i] == '.' || json[i] == '-' || json[i] == 'e' || json[i] == 'E'))
-    {
+    while (i < json.size() && (isDigit(json[i]) || json[i] == '.' ||
+        json[i] == '-' || json[i] == 'e' || json[i] == 'E')) {
         value += json[i];
         ++i;
     }
@@ -44,8 +36,7 @@ string JsonMapper::parseNumberValue(const string& json, size_t& i)
     return value;
 }
 
-void JsonMapper::parseJson(const string& jsonString, map<string, string>& jsonMap)
-{
+void JsonMapper::parseJson(const string& jsonString, map<string, string>& jsonMap) {
     enum class State { KEY, VALUE, OBJECT, ARRAY };
     State state = State::OBJECT;
     string currentKey;
@@ -53,38 +44,37 @@ void JsonMapper::parseJson(const string& jsonString, map<string, string>& jsonMa
     stack<string> keyStack;
     stack<int> arrayIndexStack;
 
-    for (size_t i = 0; i < jsonString.size(); ++i)
-    {
-        char c = jsonString[i];
+    // Handle root array
+    if (!jsonString.empty() && jsonString[0] == '[') {
+        state = State::ARRAY;
+        arrayIndexStack.push(0);
+        keyStack.push("");
+    }
 
+    for (size_t i = 0; i < jsonString.size(); ++i) {
+        char c = jsonString[i];
         if (isWhitespace(c)) continue;
 
-        switch (state)
-        {
+        switch (state) {
         case State::OBJECT:
             if (c == '{') continue;
-            if (c == '}')
-            {
-                if (!stateStack.empty())
-                {
+            if (c == '}') {
+                if (!stateStack.empty()) {
                     state = stateStack.top();
                     stateStack.pop();
                     keyStack.pop();
                 }
             }
-            else if (c == '\"')
-            {
+            else if (c == '\"') {
                 state = State::KEY;
-                --i; // Reprocess quote in KEY state
+                --i; // Reprocess quote
             }
             break;
 
         case State::KEY:
-            if (c == '\"')
-            {
+            if (c == '\"') {
                 currentKey = parseStringValue(jsonString, i);
-                if (!keyStack.empty())
-                {
+                if (!keyStack.empty() && !keyStack.top().empty()) {
                     currentKey = keyStack.top() + "." + currentKey;
                 }
                 state = State::VALUE;
@@ -93,28 +83,23 @@ void JsonMapper::parseJson(const string& jsonString, map<string, string>& jsonMa
 
         case State::VALUE:
             if (c == ':') continue;
-
-            if (c == '\"')
-            {
+            if (c == '\"') {
                 string value = parseStringValue(jsonString, i);
                 jsonMap[currentKey] = value;
                 state = State::OBJECT;
             }
-            else if (c == '{')
-            {
+            else if (c == '{') {
                 stateStack.push(State::OBJECT);
                 keyStack.push(currentKey);
                 state = State::OBJECT;
             }
-            else if (c == '[')
-            {
+            else if (c == '[') {
                 stateStack.push(State::OBJECT);
                 keyStack.push(currentKey);
                 arrayIndexStack.push(0);
                 state = State::ARRAY;
             }
-            else if (isDigit(c) || c == '-')
-            {
+            else if (isDigit(c) || c == '-') {
                 string value = parseNumberValue(jsonString, i);
                 jsonMap[currentKey] = value;
                 state = State::OBJECT;
@@ -122,32 +107,28 @@ void JsonMapper::parseJson(const string& jsonString, map<string, string>& jsonMa
             break;
 
         case State::ARRAY:
-            if (c == ']')
-            {
-                if (!stateStack.empty())
-                {
+            if (c == ']') {
+                if (!stateStack.empty()) {
                     state = stateStack.top();
                     stateStack.pop();
-                    keyStack.pop();
-                    arrayIndexStack.pop();
+                    if (!keyStack.empty()) keyStack.pop();
+                    if (!arrayIndexStack.empty()) arrayIndexStack.pop();
                 }
             }
-            else if (c == '\"')
-            {
+            else if (c == '{') {
+                string arrayKey = keyStack.top() + "[" + to_string(arrayIndexStack.top()) + "]";
+                arrayIndexStack.top()++;
+                keyStack.push(arrayKey);
+                stateStack.push(State::ARRAY);
+                state = State::OBJECT;
+            }
+            else if (c == '\"') {
                 string value = parseStringValue(jsonString, i);
                 string arrayKey = keyStack.top() + "[" + to_string(arrayIndexStack.top()) + "]";
                 jsonMap[arrayKey] = value;
                 arrayIndexStack.top()++;
             }
-            else if (c == '{')
-            {
-                string arrayKey = keyStack.top() + "[" + to_string(arrayIndexStack.top()) + "]";
-                keyStack.push(arrayKey);
-                arrayIndexStack.top()++;
-                state = State::OBJECT;
-            }
-            else if (isDigit(c) || c == '-')
-            {
+            else if (isDigit(c) || c == '-') {
                 string value = parseNumberValue(jsonString, i);
                 string arrayKey = keyStack.top() + "[" + to_string(arrayIndexStack.top()) + "]";
                 jsonMap[arrayKey] = value;
@@ -158,9 +139,7 @@ void JsonMapper::parseJson(const string& jsonString, map<string, string>& jsonMa
     }
 }
 
-void JsonMapper::map_json(string json, JsonObject& object)
-{
-    vector<string> fields = object.toJsonFields();
+void JsonMapper::map_json(string json, JsonObject& object) {
     map<string, string> jsonMap;
     parseJson(json, jsonMap);
     object.fromJson(jsonMap);

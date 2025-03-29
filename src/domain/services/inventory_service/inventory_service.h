@@ -1,46 +1,35 @@
 #ifndef INVENTORY_SERVICE_H
 #define INVENTORY_SERVICE_H
 #include "IInventory_service.h"
-#include "../../repositories/item_repository/item_repository.h"
-#include "../../entities/inventory/inventory.h"
 #include <fstream>
-class InventoryService:IInventoryService {
+#include "../json/core/json_parser.h"
+#include "../../entities/inventory/inventory.h"
+#include <iostream>
+class InventoryService : public IInventoryService {
+
 public:
-
-	void useItem(Item item) override {}
-	Item getItemInfo(Item item) override {
-		// all info about item (damage name and other) from json
-		return ExampleRepository::load(FILE_PATH)[item.id];
+	void LoadInventory()  {
 
 
 	}
-
-	
-	std::vector<Item> LoadInventory() {
-		// Загрузка предметов
-		items = ExampleRepository::load(FILE_PATH);
-
-		if (items.empty()) {
-			std::cerr << "Error: No items loaded!" << std::endl;
+	void SaveInventory(Inventory inventory) {
+		// save inventory to txt file
+		std::ofstream file;
+		file.open("src/data/local/inventory/inventory.txt");
+		if (!file.is_open()) {
+			std::cerr << "Error: Could not open the file." << std::endl;
+			return;
 		}
-		return items;
+		// all items in inventory to txt
+
+		for (int i = 0; i < inventory.items.size(); i++) {
+			file << inventory.items[i] << std::endl;
+		}
+
+		file.close();
 	}
 
-	bool SaveInventory() {
-		std::vector<std::map<std::string, std::string>> jsonItems;
-		for (auto& item : items) {
-			jsonItems.push_back(item.toJsonFields());
-		}
-		std::string jsonString = JsonParser::serialize(jsonItems);
-		std::ofstream outFile(FILE_PATH);
-		if (!outFile) {
-			std::cerr << "Error: Could not open file for writing!" << std::endl;
-			return false;
-		}
-		outFile << jsonString;
-		outFile.close();
-		return true;
-	}
 };
+
 
 #endif // !INVENTORY_SERVICE_H
