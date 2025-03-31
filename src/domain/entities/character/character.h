@@ -23,6 +23,7 @@ public:
 
 	MainCharacter() {
 		std::string _name;
+		cout << "Enter your name: ";
 		cin >> _name;
 		name = _name;
 		level = 1;

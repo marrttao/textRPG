@@ -46,6 +46,15 @@ public:
             std::uniform_int_distribution<> dis(0, bossEvents.bossEvents.size() - 1);
             int eventIndex = dis(gen);
             // Handle boss event using eventIndex
+            combatSystem.EnemyHealth = bossEvents.bossEvents[eventIndex].health;
+            combatSystem.EnemyDamage = bossEvents.bossEvents[eventIndex].damage;
+            combatSystem.Fear = bossEvents.bossEvents[eventIndex].fear;
+
+            // repository print
+			BossEventRepository::print(bossEvents.bossEvents[eventIndex]);
+            
+
+            combatSystem.Combat(character); // Pass the character to the Combat function
         }
         else {
             DefaultEventCollection defaultEvents;
@@ -61,6 +70,8 @@ public:
             combatSystem.EnemyHealth = defaultEvents.defaultEvents[eventIndex].health;
             combatSystem.EnemyDamage = defaultEvents.defaultEvents[eventIndex].damage;
             combatSystem.Fear = defaultEvents.defaultEvents[eventIndex].fear;
+            // repository print
+			DefaultEventRepository::print(defaultEvents.defaultEvents[eventIndex]);
             combatSystem.Combat(character); // Pass the character to the Combat function
         }
     }

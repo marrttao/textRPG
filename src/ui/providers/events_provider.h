@@ -25,7 +25,7 @@ public:
             std::uniform_int_distribution<> dis(min, max);
             int time = dis(gen) * 1000; // Convert to milliseconds
             std::cout << "Wait for " << time << " milliseconds" << std::endl;
-            // sleep
+			std::this_thread::sleep_for(std::chrono::milliseconds(time));
 			
             randomEvent();
             std::cout << "Wanna back to village? 1 - yes 0 - no" << std::endl;

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef DEFAULTEVENT_REPO_H
+#define DEFAULTEVENT_REPO_H
 
 #include <iostream>
 #include "../models/events/default_events/default_events.h"
@@ -18,3 +19,4 @@ public:
     }
 };
 
+#endif // !DEFAULTEVENT_REPO_H

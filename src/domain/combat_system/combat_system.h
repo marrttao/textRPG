@@ -70,6 +70,7 @@ public:
                     std::cin >> input;
                     if (input == 1) {
                         Attack(character);
+						std::cout << "You attacked! Enemy health is now: " << EnemyHealth << std::endl;
                         attacked = true;
                         break;
                     }

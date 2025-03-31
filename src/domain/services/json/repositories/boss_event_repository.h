@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef BOSS_EVENT_REPOSITORY_H
+#define BOSS_EVENT_REPOSITORY_H
 #include <iostream>
 #include "../models/events/boss_events/boss_events.h"
 
@@ -16,3 +16,5 @@ public:
         std::cout << "==========================\n";
     }
 };
+
+#endif // !BOSS_EVENT_REPOSITORY_H
