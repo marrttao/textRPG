@@ -10,7 +10,7 @@
 #include <thread>
 #include <chrono>
 #include <random>
-
+#define PATH_SWORDS "src/domain/services/json/assets/json/swords.json"
 class CombatSystem {
 public:
     int EnemyHealth;
@@ -24,25 +24,16 @@ public:
     void Attack(MainCharacter& character) {
         SwordCollection swords;
         JsonParser parser;
-        parser.parse(swords, "src/domain/services/json/models/swords/swords.json", ParsingPath::FILE_FORMAT);
+        parser.parse(swords, PATH_SWORDS, ParsingPath::FILE_FORMAT);
 
         if (Fear <= 50) {
             // random
-            std::random_device rd;
-            std::mt19937 gen(rd());
-            std::uniform_int_distribution<> dis(1, 3);
-            // if 3 miss
-            if (dis(gen) == 3) {
-                std::cout << "You missed!" << std::endl;
-            }
-            else {
-                auto it = std::find_if(swords.swords.begin(), swords.swords.end(), [&character](Sword& sword) {
-                    return sword.name == character.weapon;
-                    });
+            auto it = std::find_if(swords.swords.begin(), swords.swords.end(), [&character](Sword& sword) {
+                return sword.name == character.weapon;
+                });
 
-                if (it != swords.swords.end()) {
-                    EnemyHealth -= it->damage;
-                }
+            if (it != swords.swords.end()) {
+                EnemyHealth -= it->damage;
             }
         }
         else if (Fear > 50) {
@@ -63,6 +54,8 @@ public:
             }
         }
     }
+
+
 
     void Combat(MainCharacter& character) {
         while (EnemyHealth > 0 && character.health > 0) {

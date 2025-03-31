@@ -4,11 +4,13 @@
     "damage": 45,
     "durability": 200,
     "type": "two-handed",
+    "rarity": 25,
     "attributes": [ "fire_damage", "undead_slayer", "legendary" ]
   },
   {
     "name": "Rapier of Shadows",
     "damage": 28,
+    "rarity": 5,
     "durability": 120,
     "type": "one-handed",
     "attributes": [ "poisoned", "stealth_boost", "quick_attack" ]
@@ -18,6 +20,7 @@
     "damage": 60,
     "durability": 300,
     "type": "two-handed",
+    "rarity": 60,
     "attributes": [ "armor_piercing", "stun_chance", "heavy" ]
   }
 ]

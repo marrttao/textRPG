@@ -11,9 +11,9 @@ public:
     std::string description;
     std::string type;
     std::string location;
-    int health;
-    int damage;
-    int fear;
+    int health = 0;
+    int damage = 0;
+    int fear = 0;
 
     // Реализация методов Item
     std::string getID() const override {
@@ -34,7 +34,7 @@ public:
         description = jsonMap.count("description") ? jsonMap["description"] : "";
         type = jsonMap.count("type") ? jsonMap["type"] : "";
         location = jsonMap.count("location") ? jsonMap["location"] : "";
-		health = jsonMap.count("health") ? stoi(jsonMap["health"]) : 0;
+        health = jsonMap.count("health") ? stoi(jsonMap["health"]) : 0;
         damage = jsonMap.count("damage") ? stoi(jsonMap["damage"]) : 0;
         fear = jsonMap.count("fear") ? stoi(jsonMap["fear"]) : 0;
     }

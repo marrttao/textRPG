@@ -5,10 +5,10 @@
 #include <vector>
 #include <string>
 #include <map>
-
+#include "../../repositories/inventory_repository/inventory_repository.h"
 using namespace std;
 
-class Inventory : public JsonObject {
+class Inventory : public JsonObject, public InventoryRepository {
 public:
     vector<string> items;
 

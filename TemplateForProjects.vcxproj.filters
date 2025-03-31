@@ -37,6 +37,7 @@
     <ClInclude Include="src\domain\events\events_system\events_system.h" />
     <ClInclude Include="src\domain\services\json\repositories\boss_event_repository.h" />
     <ClInclude Include="src\domain\combat_system\combat_system.h" />
+    <ClInclude Include="src\ui\providers\MainCharacter_Provider.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\domain\services\json\assets\json\swords.json" />

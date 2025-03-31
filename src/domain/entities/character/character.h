@@ -34,10 +34,11 @@ public:
 		luck = 10;
 		experience = 0;
 		gold = 0;
+		gold = 0;
 		attack = 10;
 		defense = 10;
 		armor = "None";
-		weapon = "None";
+		weapon = "Rapier of Shadows";
 	}
 
 };

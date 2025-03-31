@@ -13,7 +13,7 @@ public:
         std::cout << "Damage: " << sword.damage << '\n';
         std::cout << "Durability: " << sword.durability << "/100\n";
         std::cout << "Type: " << sword.type << '\n';
-
+		std::cout << "Rarity: " << sword.rarity << '\n';
         std::cout << "Attributes: ";
         for (const auto& attr : sword.attributes) {
             std::cout << attr << " ";

@@ -11,6 +11,7 @@ public:
     int damage;
     int durability;
     std::string type;
+    int rarity;
     std::vector<std::string> attributes;
 
     // Реализация методов Item
@@ -24,7 +25,7 @@ public:
 
     // Методы JsonObject
     std::vector<std::string> toJsonFields() override {
-        return { "name", "damage", "durability", "type", "attributes" };
+        return { "name", "damage", "durability", "type", "rarity", "attributes"};
     }
 
     void fromJson(std::map<std::string, std::string> jsonMap) override {
@@ -32,6 +33,7 @@ public:
         damage = jsonMap.count("damage") ? stoi(jsonMap["damage"]) : 0;
         durability = jsonMap.count("durability") ? stoi(jsonMap["durability"]) : 100;
         type = jsonMap.count("type") ? jsonMap["type"] : "standard";
+		rarity = jsonMap.count("rarity") ? stoi(jsonMap["rarity"]) : 0;
 
         attributes.clear();
         for (int i = 0; ; ++i) {

@@ -39,24 +39,34 @@ public:
             BossEventCollection bossEvents;
             JsonParser parser;
             parser.parse(bossEvents, "src/domain/events/boss_events.json", ParsingPath::FILE_FORMAT);
-            std::uniform_int_distribution<> dis(1, bossEvents.bossEvents.size());
-
+            if (bossEvents.bossEvents.empty()) {
+                std::cerr << "No boss events available." << std::endl;
+                return;
+            }
+            std::uniform_int_distribution<> dis(0, bossEvents.bossEvents.size() - 1);
+            int eventIndex = dis(gen);
+            // Handle boss event using eventIndex
         }
         else {
             DefaultEventCollection defaultEvents;
             JsonParser parser;
             parser.parse(defaultEvents, "src/domain/events/default_events.json", ParsingPath::FILE_FORMAT);
-            std::uniform_int_distribution<> dis(1, defaultEvents.defaultEvents.size());
-
-            // combatSystem.enemyHealth = event health
-            // and other attributes
+            if (defaultEvents.defaultEvents.empty()) {
+                std::cerr << "No default events available." << std::endl;
+                return;
+            }
+            std::uniform_int_distribution<> dis(0, defaultEvents.defaultEvents.size() - 1);
             int eventIndex = dis(gen);
+            // Set combat system attributes based on the selected event
             combatSystem.EnemyHealth = defaultEvents.defaultEvents[eventIndex].health;
             combatSystem.EnemyDamage = defaultEvents.defaultEvents[eventIndex].damage;
             combatSystem.Fear = defaultEvents.defaultEvents[eventIndex].fear;
             combatSystem.Combat(character); // Pass the character to the Combat function
         }
     }
+
+
+
 
     void toForest() {
         IsInForest = true;
