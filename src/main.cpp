@@ -19,6 +19,23 @@ int main() {
     EventsProvider eventsProvider(combatSystem, mainCharacterProvider.character);
 
     // inventory test
+	Inventory inventory;
+	inventory.addItem("key1:value1");
+	inventory.addItem("key2:value2");
+	inventory.addItem("key3:value3");
+	inventory.addItem("key4:value4");
+	inventory.addItem("key5:value5");
+	// Save inventory
+	InventoryService inventoryService;
+	inventoryService.SaveInventory(inventory);
+	// Load inventory
+	inventoryService.LoadInventory();
+	// Get all items
+	std::vector<std::pair<std::string, std::string>> items = inventory.getAllItems();
+	for (const auto& item : items) {
+		std::cout << item.first << " " << item.second << std::endl;
+	}
+
 
     SwordCollection swords;
     JsonParser parser;

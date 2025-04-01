@@ -1,16 +1,19 @@
 #include "inventory_repository.h"
-#include <iostream>
+
 void InventoryRepository::addItem(const std::string& item) {
-	// add item in txt file
-	std::ofstream file;
-	file.open("src/data/local/inventory/inventory.txt", std::ios::app);
-	if (!file.is_open()) {
-		std::cerr << "Error: Could not open the file." << std::endl;
-		return;
-	}
-	file << item << std::endl;
-	file.close();
-
-
+    // Assuming the item is a string in the format "key:value"
+    size_t delimiterPos = item.find(':');
+    if (delimiterPos != std::string::npos) {
+        std::string first = item.substr(0, delimiterPos);
+        std::string second = item.substr(delimiterPos + 1);
+        items.push_back(std::make_pair(first, second));
+    }
 }
 
+void InventoryRepository::removeItem(const std::string& item) {
+    // Implementation for removing an item
+}
+
+std::vector<std::pair<std::string, std::string>> InventoryRepository::getAllItems() const {
+    return items;
+}
