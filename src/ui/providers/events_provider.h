@@ -6,10 +6,11 @@
 #include <thread>
 #include <chrono>
 #include <ctime>
+
 class EventsProvider : public EventsSystem {
 public:
     EventsProvider(CombatSystem& combatSystem, MainCharacter& character)
-        : EventsSystem(combatSystem, character) {}
+        : EventsSystem(combatSystem, character), character(character) {}
 
     void Event() {
         std::cout << "Event method started" << std::endl;
@@ -25,22 +26,32 @@ public:
             std::uniform_int_distribution<> dis(min, max);
             int time = dis(gen) * 1000; // Convert to milliseconds
             std::cout << "Wait for " << time << " milliseconds" << std::endl;
-			std::this_thread::sleep_for(std::chrono::milliseconds(time));
-			
+            std::this_thread::sleep_for(std::chrono::milliseconds(time));
+
             randomEvent();
-            std::cout << "Wanna back to village? 1 - yes 0 - no" << std::endl;
-            int choice;
-            std::cin >> choice;
-            if (choice == 1) {
+
+            if (character.isDead) {
+                std::cout << "You died!" << std::endl;
+                std::cout << "You have been sent back to the village but lost all gold" << std::endl;
                 toVillage();
             }
             else {
-                system("cls");
+                std::cout << "Wanna go back to the village? 1 - yes 0 - no" << std::endl;
+                int choice;
+                std::cin >> choice;
+                if (choice == 1) {
+                    toVillage();
+                }
+                else {
+                    system("cls");
+                }
             }
         }
         std::cout << "Event method ended" << std::endl;
     }
 
+private:
+    MainCharacter& character; // Added this private member to store the reference to character
 };
 
 #endif // !EVENTS_PROVIDER_H

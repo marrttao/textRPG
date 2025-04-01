@@ -73,6 +73,8 @@ public:
             // repository print
 			DefaultEventRepository::print(defaultEvents.defaultEvents[eventIndex]);
             combatSystem.Combat(character); // Pass the character to the Combat function
+
+
         }
     }
 

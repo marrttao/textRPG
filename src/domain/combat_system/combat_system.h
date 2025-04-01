@@ -89,6 +89,9 @@ public:
 
             if (character.health <= 0) {
                 std::cout << "You were defeated!" << std::endl;
+				character.gold = 0;
+				character.health = 100;
+				character.isDead = true;
                 break;
             }
         }

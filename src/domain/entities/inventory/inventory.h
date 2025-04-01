@@ -10,8 +10,8 @@ using namespace std;
 
 class Inventory : public JsonObject, public InventoryRepository {
 public:
-    vector<string> items;
 
+    vector<string> items;
     vector<string> toJsonFields() override {
         return { "items" };
     }

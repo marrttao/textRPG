@@ -9,12 +9,27 @@
 #define FILE_PATH "src/domain/services/json/assets/json/swords.json"
 #define FILE_PATHH "src/domain/services/json/assets/json/potions.json"
 
-int main() {
+
+
+int main() { 
     // combat system
     CombatSystem combatSystem(100, 10, 0);
     MainCharacter mainCharacter; // Create MainCharacter instance
     MainCharacterProvider mainCharacterProvider(mainCharacter); // Pass by reference
     EventsProvider eventsProvider(combatSystem, mainCharacterProvider.character);
+
+    // inventory test
+
+    SwordCollection swords;
+    JsonParser parser;
+    parser.parse(swords, PATH_SWORDS, ParsingPath::FILE_FORMAT);
+    // cout all swords
+	for (auto sword : swords.swords) {
+		std::cout << sword.name << " " << sword.damage << std::endl;
+	}
+
+
+	
 
     // to forest
     eventsProvider.IsInForest = true; // Set IsInForest to true

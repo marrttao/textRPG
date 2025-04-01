@@ -20,6 +20,7 @@ public:
 	short defense;
 	std::string armor;
 	std::string weapon;
+	bool isDead = false;
 
 	MainCharacter() {
 		std::string _name;
