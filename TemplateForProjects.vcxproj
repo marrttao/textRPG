@@ -147,6 +147,7 @@
     <ClInclude Include="src\domain\entities\village\npc\dealer.h" />
     <ClInclude Include="src\domain\entities\village\npc\pickpocket.h" />
     <ClInclude Include="src\domain\entities\village\npc\potion_maker.h" />
+    <ClInclude Include="src\domain\entities\village\potion_brewery\potion_brewery.h" />
     <ClInclude Include="src\domain\entities\village\smithy\smithy.h" />
     <ClInclude Include="src\domain\entities\village\strange_shop\strange_shop.h" />
     <ClInclude Include="src\domain\events\events_system\events_system.h" />

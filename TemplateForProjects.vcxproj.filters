@@ -43,6 +43,7 @@
     <ClInclude Include="src\domain\entities\village\npc\potion_maker.h" />
     <ClInclude Include="src\domain\entities\village\smithy\smithy.h" />
     <ClInclude Include="src\domain\entities\village\strange_shop\strange_shop.h" />
+    <ClInclude Include="src\domain\entities\village\potion_brewery\potion_brewery.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\domain\services\json\assets\json\swords.json" />
