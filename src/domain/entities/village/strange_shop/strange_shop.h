@@ -35,6 +35,36 @@ public:
 			cout << "Dealer is not on place." << endl;
 		}
 	}
+	void buyProduct(MainCharacter& character) {
+		cout << "Enter the name of the product you want to buy: ";
+		string productName;
+		cin >> productName;
+		
+		// find product
+
+		for (int i = 0; i < products.size(); i++) {
+			if (products[i].first == productName) {
+				if (products[i].second == "potion") {
+					PotionCollection potions;
+					JsonParser parser;
+					parser.parse(potions, "src/domain/services/json/assets/json/potions.json", ParsingPath::FILE_FORMAT);
+					// find potion with name
+					for (auto potion : potions.potions) {
+						if (potion.name == productName) {
+							if (character.gold >= potion.rarity * 3 - dealer.mood) {
+								character.gold -= potion.rarity * 3 - dealer.mood;
+								character.inventory.items.push_back(productName);
+								cout << "You bought " << productName << endl;
+							}
+							else {
+								cout << "You don't have enough gold." << endl;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 };
 
 #endif // !STRANGE_SHOP_H
