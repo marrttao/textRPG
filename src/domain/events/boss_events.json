@@ -7,7 +7,11 @@
     "location": "dark forest",
     "health": 200,
     "damage": 100,
-    "fear": 70
+    "fear": 70,
+    "reward": {
+      "gold": 75,
+      "experience points": 5
+    }
   },
   {
     "id": 2,
@@ -17,7 +21,11 @@
     "location": "goblin cave",
     "health": 200,
     "damage": 80,
-    "fear": 50
+    "fear": 50,
+    "reward": {
+      "gold": 50,
+      "experience points": 5
+    }
   },
   {
     "id": 3,
@@ -27,7 +35,11 @@
     "location": "volcanic lair",
     "health": 200,
     "damage": 150,
-    "fear": 100
+    "fear": 100,
+    "reward": {
+      "gold": 150,
+      "experience points": 5
+    }
   },
   {
     "id": 4,
@@ -37,6 +49,8 @@
     "location": "bandit camp",
     "health": 200,
     "damage": 70,
-    "fear": 40
+    "fear": 40,
+    "gold": 10,
+    "experience points": 1
   }
 ]

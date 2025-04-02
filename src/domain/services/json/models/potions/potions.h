@@ -5,13 +5,16 @@
 #include "../../core/json_object.h"
 #include "../item/item.h"
 #include <vector>
+#include <map>
+#include <string>
 
 class Potion : public JsonObject, public Item {
 public:
     std::string name;
-    std::string effect;
+    std::map<std::string, int> effect;
     int potency;
     int duration;
+	int rarity;
     std::vector<std::string> ingredients;
 
     // Реализация методов Item
@@ -25,12 +28,17 @@ public:
 
     // Методы JsonObject
     std::vector<std::string> toJsonFields() override {
-        return { "name", "effect", "potency", "duration", "ingredients" };
+        return { "name", "effect", "potency", "duration", "ingredients", "rarity"};
     }
 
     void fromJson(std::map<std::string, std::string> jsonMap) override {
         name = jsonMap.count("name") ? jsonMap["name"] : "";
-        effect = jsonMap.count("effect") ? jsonMap["effect"] : "";
+
+        effect.clear();
+        if (jsonMap.count("effect.health")) effect["health"] = stoi(jsonMap["effect.health"]);
+        if (jsonMap.count("effect.damage")) effect["damage"] = stoi(jsonMap["effect.damage"]);
+        if (jsonMap.count("effect.strength")) effect["strength"] = stoi(jsonMap["effect.strength"]);
+
         potency = jsonMap.count("potency") ? stoi(jsonMap["potency"]) : 0;
         duration = jsonMap.count("duration") ? stoi(jsonMap["duration"]) : 60;
 
@@ -44,6 +52,7 @@ public:
                 break;
             }
         }
+		rarity = jsonMap.count("rarity") ? stoi(jsonMap["rarity"]) : 0;
     }
 };
 

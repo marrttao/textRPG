@@ -1,16 +1,18 @@
 [
   {
     "name": "Healing Elixir",
-    "effect": "restore_health",
+    "effect": [ "health":, 100, "damage":, 0, "strengh":, 0 ],
     "potency": 50,
     "duration": 30,
-    "ingredients": [ "honey", "ginseng", "moonflower" ]
+    "ingredients": [ "honey", "ginseng", "moonflower" ],
+    "rarity" :  25
   },
   {
-    "name": "Mana Potion",
-    "effect": "restore_mana",
+    "name": "Rage Potion",
+    "effect": [ "health":0, "damage":50, "strengh": 10 ],
     "potency": 75,
     "duration": 45,
-    "ingredients": [ "blue_essence", "crystal_shard" ]
+    "ingredients": [ "blue_essence", "crystal_shard" ],
+    "rarity" :  50
   }
 ]

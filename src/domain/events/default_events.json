@@ -7,7 +7,9 @@
     "location": "village",
     "health": 100,
     "damage": 50,
-    "fear": 30
+    "fear": 30,
+    "gold": 30,
+    "experience points": 1
   },
   {
     "id": 2,
@@ -17,25 +19,20 @@
     "location": "road",
     "health": 100,
     "damage": 20,
-    "fear": 10
+    "fear": 10,
+    "gold": 10,
+    "experience points": 1
   },
   {
     "id": 3,
-    "name": "Dragon Sighting",
-    "description": "A dragon is seen flying over the mountains.",
-    "type": "sighting",
-    "location": "mountains",
-    "health": 100,
-    "fear": 50
-  },
-  {
-    "id": 4,
     "name": "Bandit Raid",
     "description": "Bandits raid a nearby farm.",
     "type": "combat",
     "location": "farm",
     "health": 100,
     "damage": 30,
-    "fear": 20
+    "fear": 20,
+    "gold": 10,
+    "experience points": 1
   }
 ]

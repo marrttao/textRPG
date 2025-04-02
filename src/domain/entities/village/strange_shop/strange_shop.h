@@ -9,7 +9,18 @@
 class StrangeShop {
 public:
 	Dealer dealer;
-	vector <pair<string, string>> products = { {"Health Potion", "potion"}, {"Rage Potion", "potion"} };
+	// products are all potions from json
+	std::vector<std::pair<std::string, std::string>> products;
+	StrangeShop() {
+		dealer = Dealer();
+		JsonParser parser;
+		PotionCollection potions;
+		parser.parse(potions, "src/domain/services/json/assets/json/potions.json", ParsingPath::FILE_FORMAT);
+		for (auto potion : potions.potions) {
+			products.push_back({ potion.name, "potion" });
+		}
+	}
+
 	void showProducts() {
 		if (dealer.isOnPlace) {
 			cout << "Welcome to the Strange Shop!" << endl;
@@ -53,7 +64,8 @@ public:
 						if (potion.name == productName) {
 							if (character.gold >= potion.rarity * 3 - dealer.mood) {
 								character.gold -= potion.rarity * 3 - dealer.mood;
-								character.inventory.items.push_back(productName);
+								// add potion to inventory
+								character.inventory.addItem(productName + ":potion");
 								cout << "You bought " << productName << endl;
 							}
 							else {

@@ -7,7 +7,6 @@
     <ClCompile Include="src\domain\services\json\services\json_mapper\json_mapper.cpp" />
     <ClCompile Include="src\domain\services\json\services\json_reader\json_reader.cpp" />
     <ClCompile Include="src\domain\repositories\inventory_repository\inventory_repository.cpp" />
-    <ClCompile Include="src\domain\services\json\models\book\book.cpp" />
     <ClCompile Include="src\domain\services\json\repositories\default_event_repository.h" />
     <ClCompile Include="src\ui\providers\events_provider.h" />
     <ClCompile Include="src\domain\entities\village\smithy\smithy.cpp" />
@@ -25,7 +24,6 @@
     <ClInclude Include="src\domain\services\inventory_service\IInventory_service.h" />
     <ClInclude Include="src\domain\services\inventory_service\inventory_service.h" />
     <ClInclude Include="src\domain\services\json\repositories\potion_repository\potion_repository.h" />
-    <ClInclude Include="src\domain\services\json\models\book\book.h" />
     <ClInclude Include="src\domain\services\json\models\swords\swords.h" />
     <ClInclude Include="src\domain\services\json\repositories\sword_repository.h" />
     <ClInclude Include="src\domain\services\json\models\item\item.h" />
@@ -44,6 +42,8 @@
     <ClInclude Include="src\domain\entities\village\smithy\smithy.h" />
     <ClInclude Include="src\domain\entities\village\strange_shop\strange_shop.h" />
     <ClInclude Include="src\domain\entities\village\potion_brewery\potion_brewery.h" />
+    <ClInclude Include="src\domain\entities\village\village.h" />
+    <ClInclude Include="src\ui\providers\village_provider.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\domain\services\json\assets\json\swords.json" />

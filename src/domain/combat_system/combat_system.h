@@ -16,6 +16,8 @@ public:
     int EnemyHealth;
     int EnemyDamage;
     int Fear;
+	int gold;
+	int experience;
 
     // Constructor
     CombatSystem(int enemyHealth, int enemyDamage, int fear)
@@ -84,13 +86,16 @@ public:
 
             if (EnemyHealth <= 0) {
                 std::cout << "You defeated the enemy!" << std::endl;
+				character.gold += gold;
+				character.experience += experience;
+				character.saveCharacter();
                 break;
             }
 
             if (character.health <= 0) {
                 std::cout << "You were defeated!" << std::endl;
 				character.gold = 0;
-				character.health = 100;
+				character.health = 100+character.strength*2.5;
 				character.isDead = true;
                 break;
             }

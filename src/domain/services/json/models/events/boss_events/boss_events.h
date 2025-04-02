@@ -14,6 +14,8 @@ public:
     int health = 0;
     int damage = 0;
     int fear = 0;
+	int gold = 0;
+	int experience = 0;
 
     // Реализация методов Item
     std::string getID() const override {
@@ -26,7 +28,7 @@ public:
 
     // Методы JsonObject
     std::vector<std::string> toJsonFields() override {
-        return { "name", "description", "type", "location", "health", "damage", "fear" };
+        return { "name", "description", "type", "location", "health", "damage", "fear", "gold", "experience"};
     }
 
     void fromJson(std::map<std::string, std::string> jsonMap) override {
@@ -37,6 +39,8 @@ public:
         health = jsonMap.count("health") ? stoi(jsonMap["health"]) : 0;
         damage = jsonMap.count("damage") ? stoi(jsonMap["damage"]) : 0;
         fear = jsonMap.count("fear") ? stoi(jsonMap["fear"]) : 0;
+		gold = jsonMap.count("gold") ? stoi(jsonMap["gold"]) : 0;
+		experience = jsonMap.count("experience") ? stoi(jsonMap["experience"]) : 0;
     }
 };
 
